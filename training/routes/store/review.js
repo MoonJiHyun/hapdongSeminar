@@ -31,13 +31,13 @@ router.get('/:idx', (req, res) => {
   .catch(err => { res.status(500).send({ message: "getConnection error2: "+err });})
   .then((connection) => {
     return new Promise((fulfill, reject) => {
-    	// primary 키 정렬을 이용하여 특정 가게 테이블 내의 리뷰 가져오기기
-      var query = 'select distinct comment_idx from comment where store_idx = ?';
+    	// primary 키 정렬을 이용하여 특정 가게 테이블 내의 리뷰 가져오기
+      var query = 'select distinct review_idx from review where store_idx = ?';
       connection.query(query, req.params.idx, (err, data) => {
         if(err) reject(err);
         else {
           if(data[0]) fulfill([data,connection]);
-          else res.status(500).send({message : "no comment"});
+          else res.status(500).send({message : "no review"});
         }
       });
     });
@@ -48,7 +48,7 @@ router.get('/:idx', (req, res) => {
     function getdata(i, predata){
       console.log(i);
       return new Promise((fulfill, reject) => {
-        var query = 'select * from comment where comment_idx = ?';
+        var query = 'select * from review where review_idx = ?';
         connection.query(query, predata[i].courseid, (err, data) => {
           if(err) res.status(500).send({ message:err});
           else {
