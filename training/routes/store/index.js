@@ -13,6 +13,13 @@ router.use('/menulist',menulist);
 const review=require('./review.js');
 router.use('/review',review);
 
+// 4. 가게 등록
+const add=require('./add.js');
+router.use('/add',review);
+
+// 5. 리뷰 등록
+const addreview=require('./addreview.js');
+router.use('/addreview',addreview);
 
 module.exports=router;
 
